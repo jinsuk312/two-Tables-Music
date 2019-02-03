@@ -21,6 +21,7 @@ CREATE TABLE top5000 (
   raw_eur DECIMAL(10,4) NULL,
   raw_row DECIMAL(10,4) NULL,
     -- set the primary key as position --
+    PRIMARY KEY (position)
 );
 -- creates a table called top_albums --
 CREATE TABLE top_albums (
