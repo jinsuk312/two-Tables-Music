@@ -36,7 +36,8 @@ function runSearch() {
                 "Find songs by artist",
                 "Find all artists who appear more than once",
                 "Find data within a specific range",
-                "Search for a specific song"
+                "Search for a specific song",
+                "Find artists with a top song and top album in the same year"
             ]
         })
         // where we use the user choice to run the next function and break out of the switch statement
@@ -53,6 +54,9 @@ function runSearch() {
                     break;
                 case "Search for a specific song":
                     songSearch();
+                    break;
+                case "Find artists with a top song and top album in the same year":
+                    songAndAlbumSearch();
                     break;
             }
         })
@@ -169,4 +173,26 @@ function songSearch() {
                 runSearch();
             })
         })
+}
+// function to handle search for matches with top songs in the same year of top albums
+var songAndAlbumSearch = function(){
+    inquirer
+    .prompt({
+        name:"artist",
+        type:"input",
+        message: "What artist would you like to look for?"
+    })
+    .then(function(answer){
+        var query = "SELECT top_albums.year, top_albums.position, top_albums.position, top5000.song, top5000.artist FROM top_albums ";
+        query += "INNER JOIN top5000 ON (top_albums.artist = top5000.artist AND top_albums.year = top5000.year) ";
+        query += "WHERE (top_albums.artist = ? AND top5000.artist = ?) ORDER BY top_albums.year ";
+        
+        connection.query(query,[answer.artist,answer.artist], function(err,res){
+            console.log(res.length + " Matches Found!");
+            for(var i = 0; i < res.length; i++){
+                console.log("Album Position: " + res[i].position + "\nArist: " + res[i].artist + "\nSong: " + res[i].song + "\nAlbum: " + res[i].album + "\nYear: " + res[i].year + "\n-------");
+            }
+            runSearch();
+        })
+    })
 }
