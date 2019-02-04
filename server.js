@@ -33,15 +33,14 @@ function runSearch() {
             type: "list",
             message: "What would you like to do?",
             choices: [
+                "Search for a specific song",
                 "Find songs by artist",
                 "Delete songs by artist name",
                 "Find all artists who appear more than once",
-                "Delete all artist who appear only once",
+                "Find all artist who appear only once",
                 "Find data within a specific range",
                 "Delete data within a specific range",
-                "Search for a specific song",
                 "Find artists with a top song and top album in the same year"
-                
             ]
         })
         // where we use the user choice to run the next function and break out of the switch statement
