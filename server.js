@@ -67,7 +67,7 @@ function runSearch() {
                 case "Delete data within a specific range":
                     deleteSongsByRange();
                     break;
-                case "Delete all artist who appear only once":
+                case "Find all artist who appear only once":
                     singleSearch();
                     break;
             }
